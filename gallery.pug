@@ -1,0 +1,17 @@
+-
+  const api = 'https://unsplash.it/800'
+  const pictures = 12
+  const hoverZones = 9
+
+section#gallery.section.gallery-section
+  .container
+    .gallery-header
+      h2 Gallery
+    .gallery-wrap
+      nav.expanding-gallery(style={ '--max-p': pictures, '--max-z': hoverZones } aria-label='Photo gallery')
+        each _, i in Array(pictures)
+          a(href='#' aria-label=`Photo ${i + 1}` style={ '--i': i, '--img': `url('${api}?${i}')` })
+            .img
+            aside.hover-zone(aria-hidden='true')
+              each _ in Array(hoverZones)
+                i

@@ -1,0 +1,136 @@
+/* Pure-CSS expanding gallery (FreeFrontend-inspired)
+   - Uses :has() to manage active picture (--p) and hover zone (--z)
+   - Accessible: keyboard focus-visible expands items
+*/
+
+.gallery-section {
+  background: #01071a;
+  color: #fff;
+}
+
+.gallery-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.gallery-header h2 {
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.gallery-wrap {
+  position: relative;
+}
+
+.expanding-gallery {
+  display: flex;
+  height: clamp(320px, 60vh, 620px);
+  gap: 0.5rem;
+  --max-p: 12;
+  --max-z: 9;
+  --p: 0;
+  --z: 0;
+}
+
+.expanding-gallery a {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  text-decoration: none;
+  transition: flex-grow 300ms ease;
+  outline: none;
+}
+
+/* Expand active item */
+.expanding-gallery a:is(:hover, :focus-visible) {
+  flex-grow: 4;
+}
+
+.expanding-gallery .img {
+  position: absolute;
+  inset: 0;
+  background-image: var(--img);
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 2 / 3;
+}
+
+/* Aesthetic tint that lifts on hover/focus */
+.expanding-gallery .img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  mix-blend-mode: multiply;
+  transition: opacity 300ms ease;
+}
+
+.expanding-gallery a:is(:hover, :focus-visible) .img::before {
+  opacity: 0;
+}
+
+/* Hover zones: 3x3 grid of invisible hit targets */
+.expanding-gallery .hover-zone {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  opacity: 0;
+}
+
+.expanding-gallery .hover-zone i {
+  display: block;
+}
+
+/* Focus-visible ring for keyboard users */
+.expanding-gallery a:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 3px;
+}
+
+/* Set active picture index --p using :has() */
+.expanding-gallery:has(a:nth-child(1):is(:hover, :focus-visible)) { --p: 1; }
+.expanding-gallery:has(a:nth-child(2):is(:hover, :focus-visible)) { --p: 2; }
+.expanding-gallery:has(a:nth-child(3):is(:hover, :focus-visible)) { --p: 3; }
+.expanding-gallery:has(a:nth-child(4):is(:hover, :focus-visible)) { --p: 4; }
+.expanding-gallery:has(a:nth-child(5):is(:hover, :focus-visible)) { --p: 5; }
+.expanding-gallery:has(a:nth-child(6):is(:hover, :focus-visible)) { --p: 6; }
+.expanding-gallery:has(a:nth-child(7):is(:hover, :focus-visible)) { --p: 7; }
+.expanding-gallery:has(a:nth-child(8):is(:hover, :focus-visible)) { --p: 8; }
+.expanding-gallery:has(a:nth-child(9):is(:hover, :focus-visible)) { --p: 9; }
+.expanding-gallery:has(a:nth-child(10):is(:hover, :focus-visible)) { --p: 10; }
+.expanding-gallery:has(a:nth-child(11):is(:hover, :focus-visible)) { --p: 11; }
+.expanding-gallery:has(a:nth-child(12):is(:hover, :focus-visible)) { --p: 12; }
+
+/* Set active hover zone index --z using :has() */
+.expanding-gallery:has(.hover-zone i:nth-child(1):hover) { --z: 1; }
+.expanding-gallery:has(.hover-zone i:nth-child(2):hover) { --z: 2; }
+.expanding-gallery:has(.hover-zone i:nth-child(3):hover) { --z: 3; }
+.expanding-gallery:has(.hover-zone i:nth-child(4):hover) { --z: 4; }
+.expanding-gallery:has(.hover-zone i:nth-child(5):hover) { --z: 5; }
+.expanding-gallery:has(.hover-zone i:nth-child(6):hover) { --z: 6; }
+.expanding-gallery:has(.hover-zone i:nth-child(7):hover) { --z: 7; }
+.expanding-gallery:has(.hover-zone i:nth-child(8):hover) { --z: 8; }
+.expanding-gallery:has(.hover-zone i:nth-child(9):hover) { --z: 9; }
+
+/* Mobile: allow horizontal scrolling (no hover) but keep keyboard focus expansion */
+@media (max-width: 768px) {
+  .expanding-gallery {
+    height: clamp(260px, 52vh, 520px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+  }
+
+  .expanding-gallery a {
+    flex: 0 0 68%;
+    scroll-snap-align: center;
+  }
+}
