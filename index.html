@@ -62,7 +62,10 @@
       <!-- Hero -->
       <section class="hero bg-gradient">
         <div class="container hero-inner">
-          <h1><span class="gradient-text">Comming Soon</span></h1>
+          <h1 class="gradient-text">
+            <span class="word">Coming</span>
+            <span class="word">Soon</span>
+          </h1>
           <p>
             Handcrafted wings, burgers, phillys, salads, and desserts—rooted in
             family, tradition, and unforgettable taste.
@@ -372,81 +375,14 @@
         <div class="container">
           <h2>Weekly Schedule</h2>
 
-          <div class="schedule-grid">
-            <article class="schedule-card reveal">
-              <img
-                class="schedule-image"
-                src="assets/images/placeholder.jpg"
-                alt="Downtown Atlanta"
-              />
-              <div class="schedule-body">
-                <h3 class="schedule-title">Downtown Atlanta</h3>
-                <div class="schedule-meta">
-                  <time datetime="2026-02-16">Mon · 11:00 AM – 2:00 PM</time>
-                  <span class="schedule-location">Downtown Atlanta</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="schedule-card reveal">
-              <img
-                class="schedule-image"
-                src="assets/images/placeholder.jpg"
-                alt="Local Brewery"
-              />
-              <div class="schedule-body">
-                <h3 class="schedule-title">Local Brewery</h3>
-                <div class="schedule-meta">
-                  <time datetime="2026-02-17">Tue · 5:00 PM – 9:00 PM</time>
-                  <span class="schedule-location">Local Brewery</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="schedule-card reveal">
-              <img
-                class="schedule-image"
-                src="assets/images/placeholder.jpg"
-                alt="Tech Park"
-              />
-              <div class="schedule-body">
-                <h3 class="schedule-title">Tech Park</h3>
-                <div class="schedule-meta">
-                  <time datetime="2026-02-18">Wed · 11:00 AM – 2:00 PM</time>
-                  <span class="schedule-location">Tech Park</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="schedule-card reveal">
-              <img
-                class="schedule-image"
-                src="assets/images/placeholder.jpg"
-                alt="Private Event"
-              />
-              <div class="schedule-body">
-                <h3 class="schedule-title">Private Event (Catering)</h3>
-                <div class="schedule-meta">
-                  <time datetime="2026-02-19">Thu · Private Event</time>
-                  <span class="schedule-location">Private Venue</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="schedule-card reveal">
-              <img
-                class="schedule-image"
-                src="assets/images/placeholder.jpg"
-                alt="BeltLine"
-              />
-              <div class="schedule-body">
-                <h3 class="schedule-title">BeltLine</h3>
-                <div class="schedule-meta">
-                  <time datetime="2026-02-20">Fri · 5:00 PM – 10:00 PM</time>
-                  <span class="schedule-location">BeltLine</span>
-                </div>
-              </div>
-            </article>
+          <div class="calendar-embed" aria-label="Weekly schedule calendar">
+            <iframe
+              src="https://calendar.google.com/calendar/embed?src=chrismccoy109%40gmail.com&ctz=America%2FNew_York"
+              style="border: 0"
+              frameborder="0"
+              scrolling="no"
+              title="Weekly schedule"
+            ></iframe>
           </div>
         </div>
       </section>
@@ -606,6 +542,25 @@
             });
           }
         })();
+      })();
+      // Entrance bounce: play once on first visit for the hero call-to-action
+      (function () {
+        document.addEventListener('DOMContentLoaded', function () {
+          try {
+            var KEY = 'cia_entrance_bounce_shown_v1';
+            if (localStorage && localStorage.getItem(KEY)) return;
+            var btn = document.querySelector('.hero .cta .btn-ghost, .hero .cta .btn-accent, .hero .cta .btn-primary');
+            if (!btn) return;
+            // add class to trigger single-play animation then remove on end
+            btn.classList.add('entrance-bounce');
+            btn.addEventListener('animationend', function () {
+              btn.classList.remove('entrance-bounce');
+            }, { once: true });
+            try {
+              localStorage.setItem(KEY, '1');
+            } catch (e) {}
+          } catch (e) {}
+        });
       })();
       // Newsletter modal: show once on first visit (wait until DOM is ready)
       (function () {

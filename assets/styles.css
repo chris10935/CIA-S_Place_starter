@@ -111,6 +111,18 @@ a {
   margin-bottom: 1rem;
 }
 
+/* Google Calendar embed (Weekly Schedule) */
+.calendar-embed {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.calendar-embed iframe {
+  width: 100%;
+  height: clamp(420px, 70vh, 600px);
+  border: 0;
+  display: block;
+}
+
 /* Header */
 .site-header {
   position: sticky;
@@ -224,9 +236,7 @@ a {
   overflow: hidden;
 }
 .hero-inner h1 {
-  font-size: 2.2rem;
   margin: 0 0 0.5rem 0;
-  color: #111;
 }
 .hero-inner p {
   margin: 0 auto 1rem auto;
@@ -270,12 +280,26 @@ a {
     height: 50px;
   }
   .hero-inner h1 {
-    font-size: 1.6rem;
+    font-size: clamp(3rem, 14vw, 5.5rem);
     max-width: 100%;
   }
   .gradient-text {
     font-size: clamp(1.5rem, 10vw, 2.5rem);
     max-width: 100%;
+  }
+  /* Improve hero text readability over background artwork */
+  .hero-inner .gradient-text {
+    filter:
+      drop-shadow(0 2px 0 rgba(255, 255, 255, 0.7))
+      drop-shadow(0 10px 22px rgba(0, 0, 0, 0.38));
+  }
+  .hero-inner p {
+    color: #111;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    display: inline-block;
   }
   .hero-inner {
     padding: 6rem 0 2rem;
@@ -295,6 +319,11 @@ a {
   }
   .cards {
     padding: 0 0 1rem;
+  }
+
+  /* Menu carousel: move faster on mobile */
+  #menu .cards {
+    --carousel-speed: 10s;
   }
 }
 
@@ -324,6 +353,11 @@ a {
   }
   .video-media {
     max-height: 260px;
+  }
+
+  /* Menu carousel: even faster on small phones */
+  #menu .cards {
+    --carousel-speed: 8s;
   }
 }
 
@@ -357,6 +391,10 @@ h6 {
   animation: gradient-shift 4s linear infinite;
   font-size: 11rem;
   font-weight: 1000;
+}
+
+.gradient-text .word {
+  display: block;
 }
 
 @keyframes gradient-shift {
@@ -504,6 +542,18 @@ h6 {
   }
 }
 
+/* Entrance bounce for single-play attention on first visit */
+.entrance-bounce {
+  animation: btn-bounce 1.6s cubic-bezier(0.28, 0.84, 0.42, 1) 1;
+  transform-origin: center bottom;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entrance-bounce {
+    animation: none !important;
+  }
+}
+
 /* Grids */
 .grid.two {
   display: grid;
@@ -580,6 +630,20 @@ h6 {
   min-width: 220px;
 }
 
+/* Menu Highlights: dark pink cards with white text */
+#menu .cards-track > .card {
+  background: var(--pink-500);
+  border-color: var(--pink-500);
+  color: #fff;
+}
+#menu .cards-track > .card h3,
+#menu .cards-track > .card p {
+  color: #fff;
+}
+#menu .stars img {
+  filter: invert(1) brightness(2);
+}
+
 /* Animation: moves the track to the left continuously for a seamless loop. Pause on hover. */
 .cards {
   --carousel-speed: 24s;
@@ -587,11 +651,17 @@ h6 {
 .cards-track {
   animation: scroll-left var(--carousel-speed) linear infinite;
 }
-.cards-track:hover {
-  animation-play-state: paused;
+
+/* Pause on hover only for devices that support hover (prevents touch “sticky hover”). */
+@media (hover: hover) and (pointer: fine) {
+  .cards-track:hover {
+    animation-play-state: paused;
+  }
 }
-.cards {
+
+.cards-track {
   will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 @keyframes scroll-left {
