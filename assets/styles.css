@@ -216,10 +216,12 @@ a {
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #111;
+  overflow: hidden;
 }
 .hero-inner {
   padding: 22rem 0;
   text-align: center;
+  overflow: hidden;
 }
 .hero-inner h1 {
   font-size: 2.2rem;
@@ -269,15 +271,18 @@ a {
   }
   .hero-inner h1 {
     font-size: 1.6rem;
+    max-width: 100%;
   }
   .gradient-text {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
+    max-width: 100%;
   }
   .hero-inner {
     padding: 6rem 0 2rem;
   }
   .hero-inner p {
     font-size: 0.9rem;
+    padding: 0 1rem;
   }
   .bg-gradient {
     background-attachment: scroll;
@@ -299,10 +304,7 @@ a {
     font-size: 0.95rem;
   }
   .gradient-text {
-    font-size: 2rem;
-  }
-  .hero-inner h1 {
-    font-size: 1.25rem;
+    font-size: clamp(1.2rem, 8vw, 1.8rem);
   }
   .hero-inner {
     padding: 5rem 0 1.5rem;
