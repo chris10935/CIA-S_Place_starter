@@ -387,67 +387,76 @@
               <a
                 href="#"
                 aria-label="Photo 1"
-                style="--i: 0; --img: url('images/fiery_hot_honey_lemon_pepper_wings.PNG')"
+                style="
+                  --i: 0;
+                  --img: url(&quot;images/fiery_hot_honey_lemon_pepper_wings.PNG&quot;);
+                "
               >
                 <div class="img" aria-hidden="true"></div>
                 <aside class="hover-zone" aria-hidden="true">
                   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
-                    ><i></i>
+                  ><i></i>
                 </aside>
               </a>
               <a
                 href="#"
                 aria-label="Photo 2"
-                style="--i: 1; --img: url('images/hennessy_wings.PNG')"
+                style="
+                  --i: 1;
+                  --img: url(&quot;images/hennessy_wings.PNG&quot;);
+                "
               >
                 <div class="img" aria-hidden="true"></div>
                 <aside class="hover-zone" aria-hidden="true">
                   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
-                    ><i></i>
+                  ><i></i>
                 </aside>
               </a>
               <a
                 href="#"
                 aria-label="Photo 3"
-                style="--i: 2; --img: url('images/salmon_burger.PNG')"
+                style="--i: 2; --img: url(&quot;images/salmon_burger.PNG&quot;)"
               >
                 <div class="img" aria-hidden="true"></div>
                 <aside class="hover-zone" aria-hidden="true">
                   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
-                    ><i></i>
+                  ><i></i>
                 </aside>
               </a>
               <a
                 href="#"
                 aria-label="Photo 4"
-                style="--i: 3; --img: url('images/salmon_philly.PNG')"
+                style="--i: 3; --img: url(&quot;images/salmon_philly.PNG&quot;)"
               >
                 <div class="img" aria-hidden="true"></div>
                 <aside class="hover-zone" aria-hidden="true">
                   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
-                    ><i></i>
+                  ><i></i>
                 </aside>
               </a>
               <a
                 href="#"
                 aria-label="Photo 5"
-                style="--i: 4; --img: url('images/south_west_salad.PNG')"
+                style="
+                  --i: 4;
+                  --img: url(&quot;images/south_west_salad.PNG&quot;);
+                "
               >
                 <div class="img" aria-hidden="true"></div>
                 <aside class="hover-zone" aria-hidden="true">
                   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
-                    ><i></i>
+                  ><i></i>
                 </aside>
               </a>
               <a
                 href="#"
                 aria-label="Photo 6"
-                style="--i: 5; --img: url('images/turkey_burger.PNG')"
+                style="--i: 5; --img: url(&quot;images/turkey_burger.PNG&quot;)"
               >
                 <div class="img" aria-hidden="true"></div>
                 <aside class="hover-zone" aria-hidden="true">
                   <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
-                    ><i></i>
+                  ><i></i>
                 </aside>
               </a>
             </nav>
@@ -478,7 +487,11 @@
       <section id="booking" class="section alt">
         <div class="container">
           <h2>Book the Truck / Catering</h2>
-          <form class="form" action="#" method="post">
+          <form
+            class="form"
+            action="https://formspree.io/f/xwvnwpyk"
+            method="POST"
+          >
             <div class="grid two">
               <label>
                 Name
@@ -632,19 +645,25 @@
       })();
       // Entrance bounce: play once on first visit for the hero call-to-action
       (function () {
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener("DOMContentLoaded", function () {
           try {
-            var KEY = 'cia_entrance_bounce_shown_v1';
+            var KEY = "cia_entrance_bounce_shown_v1";
             if (localStorage && localStorage.getItem(KEY)) return;
-            var btn = document.querySelector('.hero .cta .btn-ghost, .hero .cta .btn-accent, .hero .cta .btn-primary');
+            var btn = document.querySelector(
+              ".hero .cta .btn-ghost, .hero .cta .btn-accent, .hero .cta .btn-primary",
+            );
             if (!btn) return;
             // add class to trigger single-play animation then remove on end
-            btn.classList.add('entrance-bounce');
-            btn.addEventListener('animationend', function () {
-              btn.classList.remove('entrance-bounce');
-            }, { once: true });
+            btn.classList.add("entrance-bounce");
+            btn.addEventListener(
+              "animationend",
+              function () {
+                btn.classList.remove("entrance-bounce");
+              },
+              { once: true },
+            );
             try {
-              localStorage.setItem(KEY, '1');
+              localStorage.setItem(KEY, "1");
             } catch (e) {}
           } catch (e) {}
         });
